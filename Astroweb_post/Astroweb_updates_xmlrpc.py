@@ -34,7 +34,7 @@ import os
 from pandas.tseries.holiday import USFederalHolidayCalendar
 
 ## Functions
-def now_dict():
+def now_dict_calc():
     """
     Produces python dictionary with datetime information
     
@@ -201,16 +201,13 @@ def sendVinoNotice(now_dict):
     # Posting Post
     sendpost(blog_content)
 
-def main(now_dict):
+def main():
     """
     Determines current date and sends the expected notice
 
-    Parameters
-    ----------
-    now_dict: python dictionary
-        dictionary with datetime information
-        Keys: 'weekday', 'month', 'day', 'now', 'now_str'
     """
+    ## Defining `now_dict` dictionary
+    now_dict = now_dict_calc()
     ## Defining `post` strings
     post_success = '{0}\t Successfully poster. :D\n'.format(now_dict['now_str'])
     post_ran     = '{0}\t Successfully ran but no post today'.format(
@@ -220,6 +217,7 @@ def main(now_dict):
                         now_dict['now_str'])
     post_spring  = '{0}\t Spring Break. No Post today. :|\n'.format(
                         now_dict['now_str'])
+
     ## EDIT THIS ONCE PER YEAR
     thanksg_dates = list(range(20,25))
     spring_dates  = list(range( 5,10))
