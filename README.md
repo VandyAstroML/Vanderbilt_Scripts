@@ -55,5 +55,5 @@ __Examples__:
 
 ```
     0 8 * * * source activate vandyscripts; python /path/to/AJC_Reminders.py >> /path/to/ajc_log 2>&1; source deactivate;
-    0 17 * * * source activate vandyscripts; python /home/caldervf/ajc_scheduler/AJC_Reminders.py >> /home/caldervf/ajc_scheduler/ajc_log 2>&1; source deactivate;
+    0 17 * * * source activate vandyscripts; python /path/to/AJC_Reminders.py >> /path/to/ajc_log 2>&1; source deactivate;
 ```
