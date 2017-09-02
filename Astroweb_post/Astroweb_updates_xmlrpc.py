@@ -7,7 +7,7 @@ Astronomy Group wordpress site.
 'Events' section contains the latest post in the category 'Events', so updating
 the section is the same as adding new posts with the category set to 'Events'.
 
-This script use python module 'xmlrpclib' to communicate the XML-RPC protocol of
+This script use python module 'xmlrpc' to communicate the XML-RPC protocol of
 wordpress. Please make sure the XML-RPC option is on in the wordpress setting.
 You can find it at 'Settings - Writing - Remote Publishing - XML-RPC'.
 
@@ -27,7 +27,8 @@ because the wordpress editor's password is in plain text in the script!!
 import string
 import datetime
 import time
-import xmlrpclib
+# import xmlrpclib
+import xmlrpc
 import sys
 import os
 from pandas.tseries.holiday import USFederalHolidayCalendar
@@ -70,7 +71,7 @@ def assert_env_vars():
 def sendpost(blog_content):
     """
     Use XML-RPC protocol to post to the Astro wordpress site.
-    Use python module xmlrpclib to communicate with wordpress XML-RPC.  
+    Use python module xmlrpc to communicate with wordpress XML-RPC.  
     """
     # Verifying environment keys
     assert_env_vars()
@@ -84,7 +85,7 @@ def sendpost(blog_content):
     status_draft = 0
     status_published = 1
     # Initializing server
-    server = xmlrpclib.ServerProxy(wp_url)
+    server = xmlrpc.ServerProxy(wp_url)
     # Posing to Wordpress
     post_id = server.metaWeblog.newPost(wp_blogid,
                                         wp_username,
