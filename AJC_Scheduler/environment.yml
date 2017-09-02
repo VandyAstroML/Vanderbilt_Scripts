@@ -1,14 +1,9 @@
-name vandyscripts
+name: vandyscripts
 
 dependencies:
   - python=3
   - numpy
-  - os
-  - sys
   - pandas
   - ads
-  - datetime
   - requests
-  - smtplib
-  - email
   - pip
