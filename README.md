@@ -27,3 +27,15 @@ For reference, see: [https://conda.io/docs/user-guide/tasks/manage-environments.
 ```
 	source deactivate
 ```
+
+## Notes
+To use the scripts in this repository, you __must__ save the following environment variables:
+
+1. `AJC_Reminders`
+  * `ajc_user`: Vanderbilt VUnet ID. This is used as the _user_ for sending email addresses.
+  * `ajc_pswd`: Password for you vanderbilt email address.
+2. `Astroweb_updates_xmlrpc`
+  * `wp_username`: _Username_ for the Astro Wordpress page.
+  * `wp_password`: _Password_ for the Astro Wordpress page.
+
+Make sure to store this in your `~/.bashrc` or `~/.bash_profile` as __environment variables__ for the scripts to work.
