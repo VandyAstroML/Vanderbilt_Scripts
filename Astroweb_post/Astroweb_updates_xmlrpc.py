@@ -56,11 +56,24 @@ def now_dict():
 
     return now_dict
 
+def assert_env_vars():
+    """
+    Asserts that the existence of the necessary environment variables
+    """
+    try:
+        wp_username = os.environ['wp_username']
+        wp_password = os.environ['wp_username']
+    except KeyError:
+        msg = '>> `Keyerror`'
+        raise ValueError(msg)
+
 def sendpost(blog_content):
     """
     Use XML-RPC protocol to post to the Astro wordpress site.
     Use python module xmlrpclib to communicate with wordpress XML-RPC.  
     """
+    # Verifying environment keys
+    assert_env_vars()
     # Wordpress URL and Account
     wp_url      = "https://as.vanderbilt.edu/astronomy/manage/xmlrpc.php"
     wp_username = os.environ['wp_username']
