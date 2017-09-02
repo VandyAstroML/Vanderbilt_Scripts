@@ -32,8 +32,7 @@ import sys
 import os
 from pandas.tseries.holiday import USFederalHolidayCalendar
 
-
-
+## Functions
 def now_dict():
     """
     Produces python dictionary with datetime information
