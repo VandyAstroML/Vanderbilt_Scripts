@@ -26,6 +26,10 @@ For reference, see: [https://conda.io/docs/user-guide/tasks/manage-environments.
 ```
 	source deactivate
 ```
+4. To update the `environment.yml` file:
+```
+  conda env update -f environment.yml
+```
 
 ## Notes
 ### Environment Variables
