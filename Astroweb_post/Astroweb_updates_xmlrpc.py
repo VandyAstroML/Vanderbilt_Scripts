@@ -31,7 +31,6 @@ import time
 import xmlrpc
 import sys
 import os
-from pandas.tseries.holiday import USFederalHolidayCalendar
 
 ## Functions
 def now_dict_calc():
