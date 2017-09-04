@@ -5,30 +5,31 @@ Repository for storing scripts used by the Vanderbilt Astronomy Department.
 
 **Date**  : 2017-09-01
 
-## Installing Environment
+## Installing Environment & Dependencies
 To use the scripts in this repository, you should have _Anaconda_ installed. This will simplify the process of installing all the dependencies.
 
 For reference, see: [https://conda.io/docs/user-guide/tasks/manage-environments.html](https://conda.io/docs/user-guide/tasks/manage-environments.html)
 
-1. Create the environment from the environment.yml file:
+* Create the environment from the environment.yml file:
 
 ```
-	conda env create -f environment.yml
+	make create_environment
 ```
 
-2. Activate the new environment:
+* Activate the new environment:
 
 ```
 	source activate vandyscripts
 ```
-3. Deactivate the new environment:
+* Deactivate the new environment:
 
 ```
 	source deactivate
 ```
-4. To update the `environment.yml` file:
+* To update the `environment.yml` file (when the required packages have changed):
+
 ```
-  conda env update -f environment.yml
+  make update_environment
 ```
 
 ## Notes
