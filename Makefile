@@ -9,7 +9,8 @@ PROJECT_NAME = vandyscripts
 PYTHON_INTERPRETER = python
 ENVIRONMENT_FILE = environment.yml
 BASHRC_PATH = ~/.bashrc
-AUTOENV_PATH = "https://github.com/kennethreitz/autoenv"
+CONDAENV_URL = "https://github.com/chdoig/conda-auto-env"
+CONDAENV_PATH = ~/.conda-auto-env
 
 # Shell file
 ifeq ($(uname), Darwin)
@@ -25,13 +26,12 @@ else
 HAS_CONDA=True
 endif
 
-# AUTOENV
-ifeq (,$(shell which activate.sh))
-HAS_AUTOENV=False
+## Conda Env
+ifneq ($(wildcard $(CONDAENV_PATH)),)
+HAS_CONDAENV=True
 else
-HAS_AUTOENV=True
+HAS_CONDAENV=False
 endif
-
 
 
 #################################################################################
@@ -61,40 +61,26 @@ ifeq (True,$(HAS_CONDA))
 		conda env update -f $(ENVIRONMENT_FILE)
 endif
 
-## Creates environment file to use with autoenv
-autoenv_create:
-ifeq (True,$(HAS_AUTOENV))
-		@echo ">>> Detected autoenv, creating .env file"
-		echo "source activate $(PROJECT_NAME)" >> $(PROJECT_DIR)/$(PROJECT_NAME).env
-		@echo ">>> $(PROJECT_NAME).env file created!"
-else
-		@echo ">>> autoenv not detected...Installing"
-		git clone git://github.com/kennethreitz/autoenv.git ~/.autoenv
+## Creates environment file to use with `conda-auto-env`
+conda_env_create:
+ifeq (False,$(HAS_CONDAENV))
+		@echo ">>> `conda-auto-env` not detected... Installing"
+		@echo "git clone $(CONDAENV_URL) $(CONDAENV_PATH)"
+		git clone $(CONDAENV_URL) $(CONDAENV_PATH)
+		@echo "source $(CONDAENV_PATH) >> $(BASH_PATH)"
 		echo "" >> $(BASH_PATH)
-		echo "# AUTOENV ($(AUTOENV_PATH))" >> $(BASH_PATH)
-		echo 'source ~/.autoenv/activate.sh' >> $(BASH_PATH)
+		echo "# CONDA-ENV ($(CONDAENV_URL))" >> $(BASH_PATH)
+		echo "source $(CONDAENV_PATH)" >> $(BASH_PATH)
 		echo "" >> $(BASH_PATH)
-		@echo ">>> Detected autoenv, creating .env file"
-		echo "source activate $(PROJECT_NAME)" >> $(PROJECT_DIR)/$(PROJECT_NAME).env
-		@echo ">>> $(PROJECT_NAME).env file created!"
-endif
+		@echo ">>> Finished installing `conda-auto-env`! Done!"
 
-## Deletes autoenv environment
-autoenv_delete:
-ifeq (True,$(HAS_AUTOENV))
-		pip uninstall -y autoenv
-		@echo "rm $(PROJECT_DIR)/$(PROJECT_NAME).env"
-		rm $(PROJECT_DIR)/$(PROJECT_NAME).env
-		@echo "autoenv and `.env` file deleted!"
-else
-		@echo "rm $(PROJECT_DIR)/$(PROJECT_NAME).env"
-		rm $(PROJECT_DIR)/$(PROJECT_NAME).env
-		@echo "autoenv and `.env` file deleted!"
-endif
-
-
-
-
+## Deletes environment files for `conda-auto-env`
+conda_env_delete:
+ifeq (True,$(HAS_CONDAENV))
+		@echo ">>> `conda-auto-env` not detected... Deleting"
+		@echo "rm -rf $(CONDAENV_PATH)"
+		rm -rf $(CONDAENV_PATH)
+		@echo ">>> Finished uninstalling `conda-auto-env`! Done!"
 
 
 
