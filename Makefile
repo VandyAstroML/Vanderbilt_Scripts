@@ -70,10 +70,11 @@ ifeq (True,$(HAS_AUTOENV))
 else
 		@echo ">>> autoenv not detected...Installing"
 		pip install autoenv
-		echo "\n" >> $(BASH_PATH)
-		echo "\n" >> $(BASH_PATH)
+		echo "" >> $(BASH_PATH)
+		echo "" >> $(BASH_PATH)
 		echo "# AUTOENV ($(AUTOENV_PATH))" >> $(BASH_PATH)
 		echo "source `which activate.sh`" >> $(BASH_PATH)
+		echo "" >> $(BASH_PATH)
 		@echo ">>> Detected autoenv, creating .env file"
 		echo "source activate $(PROJECT_NAME)" >> $(PROJECT_DIR)/$(PROJECT_NAME).env
 		@echo ">>> $(PROJECT_NAME).env file created!"
