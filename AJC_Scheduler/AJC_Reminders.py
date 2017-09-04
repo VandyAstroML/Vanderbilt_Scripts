@@ -303,8 +303,8 @@ def send_email_reminder(ajc_gs_pd, now_dict):
         ## Student's Details
         today_info_pd  = today_ajc_pd.iloc[0]
         ## Email details
-        # to_email = today_info_pd['email']
-        to_email = 'victor.calderon90@gmail.com'
+        to_email = today_info_pd['email']
+        # to_email = 'victor.calderon90@gmail.com'
         ## Logging in to Server
         smtpserver, my_email = email_init(email_type='vandy')
         # Create message container - the correct MIME type is multipart/alternative.
