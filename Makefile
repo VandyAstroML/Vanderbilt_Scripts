@@ -9,7 +9,7 @@ PROJECT_NAME = vandyscripts
 PYTHON_INTERPRETER = python
 ENVIRONMENT_FILE = environment.yml
 BASHRC_PATH = ~/.bashrc
-CONDAENV_URL = "https://github.com/chdoig/conda-auto-env"
+CONDAENV_URL = "https://github.com/sharonzhou/conda-autoenv"
 CONDAENV_PATH = ~/.conda-auto-env
 
 # Shell file
@@ -27,10 +27,10 @@ HAS_CONDA=True
 endif
 
 ## Conda Env
-ifneq ($(wildcard $(CONDAENV_PATH)),)
-HAS_CONDAENV=True
-else
+ifeq(,$(shell which conda_autoenv.sh))
 HAS_CONDAENV=False
+else
+HAS_CONDAENV=True
 endif
 
 
@@ -61,30 +61,23 @@ ifeq (True,$(HAS_CONDA))
 		conda env update -f $(ENVIRONMENT_FILE)
 endif
 
-## Creates environment file to use with `conda-auto-env`
-conda_env_create:
+## Creates environment file to use with `Conda-autoenv`
+condaenv_install:
 ifeq (False,$(HAS_CONDAENV))
-		@echo ">>> `conda-auto-env` not detected... Installing"
-		@echo "git clone $(CONDAENV_URL) $(CONDAENV_PATH)"
-		git clone $(CONDAENV_URL) $(CONDAENV_PATH)
-		@echo "source $(CONDAENV_PATH) >> $(BASH_PATH)"
+		@echo ">>> `Conda-autoenv` not detected... Installing"
+		@echo "pip install conda-autoenv"
+		pip install conda-autoenv
+		@echo "echo 'source `which conda_autoenv.sh`' >> $(BASH_PATH)"
 		echo "" >> $(BASH_PATH)
-		echo "# CONDA-ENV ($(CONDAENV_URL))" >> $(BASH_PATH)
-		echo "source $(CONDAENV_PATH)" >> $(BASH_PATH)
+		echo "# Conda-autoenv ($(CONDAENV_URL))" >> $(BASH_PATH)
+		echo "source `which conda_autoenv.sh`" >> $(BASH_PATH)
 		echo "" >> $(BASH_PATH)
-		@echo ">>> Finished installing `conda-auto-env`! Done!"
+		@echo ">>> `Conda-autoenv` installed~ Done!"
 endif
 
-## Deletes environment files for `conda-auto-env`
-conda_env_delete:
-ifeq (True,$(HAS_CONDAENV))
-		@echo ">>> `conda-auto-env` not detected... Deleting"
-		@echo "rm -rf $(CONDAENV_PATH)"
-		rm -rf $(CONDAENV_PATH)
-		@echo ">>> Finished uninstalling `conda-auto-env`! Done!"
-endif
-
-
+## Uninstalls `Conda-autoenv`
+condaenv_remove:
+	pip uninstall -y conda-autoenv
 
 #################################################################################
 # PROJECT RULES                                                                 #
