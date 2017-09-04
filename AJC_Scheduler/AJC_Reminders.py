@@ -383,8 +383,8 @@ def send_email_PHYS_AJC(ajc_gs_pd, now_dict):
     if today_ajc_pd.shape[0] == 1:
         ## Logging in to Server
         smtpserver, my_email = email_init(email_type='vandy')
-        # to_email = 'PHYS_AJC@LIST.VANDERBILT.EDU'
-        to_email = 'victor.calderon90@gmail.com'
+        to_email = 'PHYS_AJC@LIST.VANDERBILT.EDU'
+        # to_email = 'victor.calderon90@gmail.com'
         # Create message container - the correct MIME type is multipart/alternative.
         msg = MIMEMultipart('alternative')
         msg['Subject'] = 'Astronomy Journal Club'
