@@ -8,18 +8,31 @@ PROJECT_DIR := $(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
 PROJECT_NAME = vandyscripts
 PYTHON_INTERPRETER = python
 ENVIRONMENT_FILE = environment.yml
+BASHRC_PATH = ~/.bashrc
+AUTOENV_PATH = "https://github.com/kennethreitz/autoenv"
 
+# Shell file
+ifeq ($(uname), Darwin)
+BASH_PATH = ~/.bash_profile
+else
+BASH_PATH = ~/.bashrc
+endif
+
+# Anaconda
 ifeq (,$(shell which conda))
 HAS_CONDA=False
 else
 HAS_CONDA=True
 endif
 
+# AUTOENV
 ifeq (,$(shell which activate.sh))
 HAS_AUTOENV=False
 else
 HAS_AUTOENV=True
 endif
+
+
 
 #################################################################################
 # COMMANDS                                                                      #
@@ -57,7 +70,8 @@ ifeq (True,$(HAS_AUTOENV))
 else
 		@echo ">>> autoenv not detected...Installing"
 		pip install autoenv
-		echo "source `which activate.sh`" >> ~/.bashrc
+		echo "\n\n# AUTOENV ($(AUTOENV_PATH))\n" >> $(BASH_PATH)
+		echo "source `which activate.sh`" >> $(BASH_PATH)
 		@echo ">>> Detected autoenv, creating .env file"
 		echo "source activate $(PROJECT_NAME)" >> $(PROJECT_DIR)/$(PROJECT_NAME).env
 		@echo ">>> $(PROJECT_NAME).env file created!"
