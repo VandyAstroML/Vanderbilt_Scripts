@@ -71,7 +71,6 @@ else
 		@echo ">>> autoenv not detected...Installing"
 		pip install autoenv
 		echo "" >> $(BASH_PATH)
-		echo "" >> $(BASH_PATH)
 		echo "# AUTOENV ($(AUTOENV_PATH))" >> $(BASH_PATH)
 		echo "source `which activate.sh`" >> $(BASH_PATH)
 		echo "" >> $(BASH_PATH)
