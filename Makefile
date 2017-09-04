@@ -8,9 +8,6 @@ PROJECT_DIR := $(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
 PROJECT_NAME = vandyscripts
 PYTHON_INTERPRETER = python
 ENVIRONMENT_FILE = environment.yml
-BASHRC_PATH = ~/.bashrc
-CONDAENV_URL = "https://github.com/sharonzhou/conda-autoenv"
-CONDAENV_PATH = ~/.conda-auto-env
 
 # Shell file
 ifeq ($(uname), Darwin)
@@ -24,13 +21,6 @@ ifeq (,$(shell which conda))
 HAS_CONDA=False
 else
 HAS_CONDA=True
-endif
-
-# Conda Env
-ifeq (,$(shell which conda_autoenv.sh))
-HAS_CONDAENV=False
-else
-HAS_CONDAENV=True
 endif
 
 
@@ -61,23 +51,6 @@ ifeq (True,$(HAS_CONDA))
 		conda env update -f $(ENVIRONMENT_FILE)
 endif
 
-## Creates environment file to use with `Conda-autoenv`
-condaenv_install:
-ifeq (False,$(HAS_CONDAENV))
-		@echo ">>> `Conda-autoenv` not detected... Installing"
-		@echo "pip install conda-autoenv"
-		pip install conda-autoenv
-		@echo "echo 'source `which conda_autoenv.sh`' >> $(BASH_PATH)"
-		echo "" >> $(BASH_PATH)
-		echo "# Conda-autoenv ($(CONDAENV_URL))" >> $(BASH_PATH)
-		echo "source `which conda_autoenv.sh`" >> $(BASH_PATH)
-		echo "" >> $(BASH_PATH)
-		@echo ">>> `Conda-autoenv` installed~ Done!"
-endif
-
-## Uninstalls `Conda-autoenv`
-condaenv_remove:
-	pip uninstall -y conda-autoenv
 
 #################################################################################
 # PROJECT RULES                                                                 #
