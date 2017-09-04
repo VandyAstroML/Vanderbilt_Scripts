@@ -30,7 +30,6 @@ ifeq (,$(shell which activate.sh))
 HAS_AUTOENV=False
 else
 HAS_AUTOENV=True
-@echo "$(HAS_AUTOENV)"
 endif
 
 
