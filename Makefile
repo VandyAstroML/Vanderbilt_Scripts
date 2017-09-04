@@ -15,6 +15,12 @@ else
 HAS_CONDA=True
 endif
 
+ifeq (,$(shell which activate.sh))
+HAS_AUTOENV=False
+else
+HAS_AUTOENV=True
+endif
+
 #################################################################################
 # COMMANDS                                                                      #
 #################################################################################
@@ -41,6 +47,22 @@ ifeq (True,$(HAS_CONDA))
 		@echo ">>> Detected conda, creating conda environment."
 		conda env update -f $(ENVIRONMENT_FILE)
 endif
+
+## Creates environment file to use with autoenv
+autoenv_create:
+ifeq (True,$(HAS_AUTOENV))
+		@echo ">>> Detected autoenv, creating .env file"
+		echo "source activate $(PROJECT_NAME)" >> $(PROJECT_DIR)/$(PROJECT_NAME).env
+		@echo ">>> $(PROJECT_NAME).env file created!"
+else
+		@echo ">>> autoenv not detected...Installing"
+		pip install autoenv
+		echo "source `which activate.sh`" >> ~/.bashrc
+		@echo ">>> Detected autoenv, creating .env file"
+		echo "source activate $(PROJECT_NAME)" >> $(PROJECT_DIR)/$(PROJECT_NAME).env
+		@echo ">>> $(PROJECT_NAME).env file created!"
+endif
+
 
 
 #################################################################################
