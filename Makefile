@@ -31,6 +31,7 @@ lint:
 create_environment:
 ifeq (True,$(HAS_CONDA))
 		@echo ">>> Detected conda, creating conda environment."
+		conda config --add channels conda-forge
 		conda env create -f $(ENVIRONMENT_FILE)
 endif
 
