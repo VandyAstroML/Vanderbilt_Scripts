@@ -25,7 +25,7 @@ import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 
-def ADS_Query(title, author, year):
+def ADS_Query(title, author, year, arxiv_id):
     """
     Performs an ADS query on the `title` for AJC
 
@@ -43,7 +43,7 @@ def ADS_Query(title, author, year):
     # Configuring Token
     ads.config.token = ADS_token
     # Searching for Paper
-    papers = list(ads.SearchQuery(q=title, first_author=author, year=year,
+    papers = list(ads.SearchQuery(arXiv=arxiv_id, first_author=author, year=year,
                 fl=['title','author','year','doi','identifier',
                     'first_author']))
     assert(len(papers)==1)
@@ -392,11 +392,13 @@ def send_email_PHYS_AJC(ajc_gs_pd, now_dict):
         msg['To'     ] = to_email
         msg.add_header('reply-to', my_email)
         # Sending email
-        today_info_pd  = today_ajc_pd.iloc[0]
-        title, author  = today_info_pd['Title'].split('by')
-        title          = title.strip().replace('“',"").replace('”',"")
-        author, year   = author.strip().split(' et al. ')
-        year           = int(year.replace('(','').replace(')',''))
+        today_info_pd   = today_ajc_pd.iloc[0]
+        title, author   = today_info_pd['Title'].split('by')
+        title           = title.strip().replace('“',"").replace('”',"")
+        author, year_id = author.strip().split(' et al. ')
+        year, arxiv_id  = year_id.split(" ")
+        year            = int(year.replace('(','').replace(')',''))
+        arxiv_id        = arxiv_id.replace('[','').replace(']','')
         # Date
         today_datetime = datetime.datetime.date(today_info_pd['Date'])
         today_month    = today_datetime.strftime("%B")
@@ -408,7 +410,7 @@ def send_email_PHYS_AJC(ajc_gs_pd, now_dict):
                                                       today_date,
                                                       today_year)
         ## ADS Query
-        ads_link, ads_link_match = ADS_Query(title, author, year)
+        ads_link, ads_link_match = ADS_Query(title, author, year, arxiv_id)
         ## Composing message
         msg_html  = '<html>'
         msg_html += '<head></head>'
