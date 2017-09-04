@@ -26,7 +26,7 @@ else
 HAS_CONDA=True
 endif
 
-## Conda Env
+# Conda Env
 ifeq (,$(shell which conda_autoenv.sh))
 HAS_CONDAENV=False
 else
