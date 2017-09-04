@@ -73,6 +73,7 @@ ifeq (False,$(HAS_CONDAENV))
 		echo "source $(CONDAENV_PATH)" >> $(BASH_PATH)
 		echo "" >> $(BASH_PATH)
 		@echo ">>> Finished installing `conda-auto-env`! Done!"
+endif
 
 ## Deletes environment files for `conda-auto-env`
 conda_env_delete:
@@ -81,6 +82,7 @@ ifeq (True,$(HAS_CONDAENV))
 		@echo "rm -rf $(CONDAENV_PATH)"
 		rm -rf $(CONDAENV_PATH)
 		@echo ">>> Finished uninstalling `conda-auto-env`! Done!"
+endif
 
 
 
