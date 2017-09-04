@@ -9,3 +9,5 @@ dependencies:
   - ads
   - requests
   - pip
+  - pip:
+    - autoenv
