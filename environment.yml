@@ -2,7 +2,6 @@ name: vandyscripts
 
 dependencies:
   - python>=3.6
-  - anaconda
   - ipython
   - numpy
   - pandas
