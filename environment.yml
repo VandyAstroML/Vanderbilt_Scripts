@@ -7,10 +7,7 @@ dependencies:
   - pandas
   - ads
   - requests
+  - lxml
+  - html5lib
+  - BeautifulSoup4
   - pip
-  - pip:
-    - autoenv
-    - lxml
-    - html5lib
-    - BeautifulSoup4
-    - conda-autoenv
