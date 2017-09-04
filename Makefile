@@ -79,6 +79,22 @@ else
 		@echo ">>> $(PROJECT_NAME).env file created!"
 endif
 
+## Deletes autoenv environment
+autoenv_delete:
+ifeq (True,$(HAS_AUTOENV))
+		pip uninstall -y autoenv
+		@echo "rm $(PROJECT_DIR)/$(PROJECT_NAME).env"
+		rm $(PROJECT_DIR)/$(PROJECT_NAME).env
+		@echo "autoenv and `.env` file deleted!"
+else
+		@echo "rm $(PROJECT_DIR)/$(PROJECT_NAME).env"
+		rm $(PROJECT_DIR)/$(PROJECT_NAME).env
+		@echo "autoenv and `.env` file deleted!"	
+
+
+
+
+
 
 
 #################################################################################
