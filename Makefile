@@ -89,7 +89,8 @@ ifeq (True,$(HAS_AUTOENV))
 else
 		@echo "rm $(PROJECT_DIR)/$(PROJECT_NAME).env"
 		rm $(PROJECT_DIR)/$(PROJECT_NAME).env
-		@echo "autoenv and `.env` file deleted!"	
+		@echo "autoenv and `.env` file deleted!"
+endif
 
 
 
