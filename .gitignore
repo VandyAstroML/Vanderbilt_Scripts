@@ -97,3 +97,6 @@ ENV/
 
 # mypy
 .mypy_cache/
+
+### Project-based files
+Astroweb_post/updatelog2
