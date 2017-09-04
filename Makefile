@@ -1,4 +1,4 @@
-.PHONY: clean data lint requirements sync_data_to_s3 sync_data_from_s3
+.PHONY: clean lint create_environment update_environment autoenv_create
 
 #################################################################################
 # GLOBALS                                                                       #
