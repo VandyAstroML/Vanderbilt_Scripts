@@ -45,10 +45,34 @@ To use the scripts in this repository, you __must__ save the following environme
 
 Make sure to store this in your `~/.bashrc` or `~/.bash_profile` as __environment variables__ for the scripts to work. If you don't know these passwords, contact the former person in charge of *AJC*.
 
+### Makefile
+The package counts with a _Makefile_ with useful functions. To see all the functions and their descriptions, type:
+
+```
+$: 	make show-help
+	
+	Available rules:
+	
+	clean               Delete all compiled Python files
+	create_environment  Set up python interpreter environment
+	crontab_clean       Cleans the Crontab
+	crontab_create      Create crontab file to attach
+	crontab_dir         Checks if CRONTAB folder exits
+	crontab_file        Checks if CRONTAB file exists
+	lint                Lint using flake8
+	update_environment  Update python interpreter environment
+```
+
 ### Regular Schedule
 These scripts are meant to be run on a daily basis. You can do this by setting up a "crontab job". For further reference, see the "[Crontab - Quick Reference ](http://www.adminschoice.com/crontab-quick-reference)".
 
+You can use the `make` functions to _create_ or _remove_ crontab jobs.
+
 __Examples__:
+
+* Using the Makefile functions
+  * `make crontab_create`: Writes `crontab` commands to current `crontab` file to be run at 7am and 8am.
+  * `make crontab_clean`: Cleans the `crontab` file and deletes the `crontab` tasks for the user.
 
 1. `Astroweb_updates_xmlrpc.py`:
   * The code will run every day at 7am, and it will save the output to the file `updatelog2`.
