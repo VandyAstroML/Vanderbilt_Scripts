@@ -27,7 +27,6 @@ because the wordpress editor's password is in plain text in the script!!
 import string
 import datetime
 import time
-# import xmlrpclib
 import xmlrpc
 import sys
 import os
