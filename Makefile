@@ -55,9 +55,8 @@ endif
 ## Create crontab file to attach
 create_crontab:
 	@echo ">>> Creating CRONTAB file..."
+	echo "0 7 * * * source activate $(PROJECT_NAME); python $(PROJECT_DIR)/Astroweb_post/Astroweb_updates_xmlrpc.py >> $(PROJECT_DIR)/Astroweb_post/updatelog2 2>&1 ; source deactivate;" >> $(CRONTAB_FILE)
 	echo "0 8 * * * source activate $(PROJECT_NAME); python $(PROJECT_DIR)/AJC_Scheduler/AJC_Reminders.py >> $(PROJECT_DIR)/AJC_Scheduler/ajc_log 2>&1 ; source deactivate;" >> $(CRONTAB_FILE)
-	echo "0 17 * * * source activate $(PROJECT_NAME); python $(PROJECT_DIR)/AJC_Scheduler/AJC_Reminders.py >> $(PROJECT_DIR)/AJC_Scheduler/ajc_log 2>&1 ; source deactivate;" >> $(CRONTAB_FILE)
-	echo "0 17 * * * source activate $(PROJECT_NAME); python $(PROJECT_DIR)/Astroweb_post/Astroweb_updates_xmlrpc.py >> $(PROJECT_DIR)/Astroweb_post/updatelog2 2>&1 ; source deactivate;" >> $(CRONTAB_FILE)
 	@echo ">>> CRONTAB file created! Done!"
 
 
