@@ -5,8 +5,10 @@
 #################################################################################
 
 PROJECT_DIR := $(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
+PROJECT_NAME = vandyscripts
 PYTHON_INTERPRETER = python
 ENVIRONMENT_FILE = environment.yml
+CRONTAB_FILE = "$(PROJECT_DIR)/crontab_$(PROJECT_NAME).dat"
 
 # Shell file
 ifeq ($(uname), Darwin)
@@ -49,6 +51,14 @@ ifeq (True,$(HAS_CONDA))
 		@echo ">>> Detected conda, creating conda environment."
 		conda env update -f $(ENVIRONMENT_FILE)
 endif
+
+## Create crontab file to attach
+create_crontab:
+	@echo ">>> Creating CRONTAB file..."
+	echo "0 8 * * * source activate $(PROJECT_NAME); python $(PROJECT_DIR)/AJC_Scheduler/AJC_Reminders.py >> $(PROJECT_DIR)/AJC_Scheduler/ajc_log 2>&1 ; source deactivate;" >> $(CRONTAB_FILE)
+	echo "0 17 * * * source activate $(PROJECT_NAME); python $(PROJECT_DIR)/AJC_Scheduler/AJC_Reminders.py >> $(PROJECT_DIR)/AJC_Scheduler/ajc_log 2>&1 ; source deactivate;" >> $(CRONTAB_FILE)
+	echo "0 17 * * * source activate $(PROJECT_NAME); python $(PROJECT_DIR)/Astroweb_post/Astroweb_updates_xmlrpc.py >> $(PROJECT_DIR)/Astroweb_post/updatelog2 2>&1 ; source deactivate;" >> $(CRONTAB_FILE)
+	@echo ">>> CRONTAB file created! Done!"
 
 
 #################################################################################
