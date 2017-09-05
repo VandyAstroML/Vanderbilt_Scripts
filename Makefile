@@ -1,4 +1,5 @@
-.PHONY: clean lint create_environment update_environment autoenv_create
+.PHONY: clean lint create_environment update_environment crontab_create 
+	crontab_dir crontab_clean
 
 #################################################################################
 # GLOBALS                                                                       #
@@ -8,7 +9,9 @@ PROJECT_DIR := $(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
 PROJECT_NAME = vandyscripts
 PYTHON_INTERPRETER = python
 ENVIRONMENT_FILE = environment.yml
-CRONTAB_FILE = "$(PROJECT_DIR)/crontab_$(PROJECT_NAME).dat"
+CRONTAB_OUTFILE = "$(PROJECT_DIR)/crontab_$(PROJECT_NAME).dat"
+CRONTAB_MAINPATH = ~/crontab_jobs
+CRONTAB_MAINFILE = $(CRONTAB_MAINPATH)/crontab_file
 
 # Shell file
 ifeq ($(uname), Darwin)
@@ -23,7 +26,6 @@ HAS_CONDA=False
 else
 HAS_CONDA=True
 endif
-
 
 #################################################################################
 # COMMANDS                                                                      #
@@ -53,12 +55,31 @@ ifeq (True,$(HAS_CONDA))
 endif
 
 ## Create crontab file to attach
-create_crontab:
-	@echo ">>> Creating CRONTAB file..."
-	echo "0 7 * * * source activate $(PROJECT_NAME); python $(PROJECT_DIR)/Astroweb_post/Astroweb_updates_xmlrpc.py >> $(PROJECT_DIR)/Astroweb_post/updatelog2 2>&1 ; source deactivate;" >> $(CRONTAB_FILE)
-	echo "0 8 * * * source activate $(PROJECT_NAME); python $(PROJECT_DIR)/AJC_Scheduler/AJC_Reminders.py >> $(PROJECT_DIR)/AJC_Scheduler/ajc_log 2>&1 ; source deactivate;" >> $(CRONTAB_FILE)
+crontab_create: crontab_file
+	@echo "0 7 * * * source activate $(PROJECT_NAME); python $(PROJECT_DIR)/Astroweb_post/Astroweb_updates_xmlrpc.py >> $(PROJECT_DIR)/Astroweb_post/updatelog2 2>&1 ; source deactivate;" > $(CRONTAB_OUTFILE)
+	@echo "0 7 * * * source activate $(PROJECT_NAME); python $(PROJECT_DIR)/Astroweb_post/Astroweb_updates_xmlrpc.py >> $(PROJECT_DIR)/Astroweb_post/updatelog2 2>&1 ; source deactivate;" >> $(CRONTAB_MAINFILE)
+	@echo "0 8 * * * source activate $(PROJECT_NAME); python $(PROJECT_DIR)/AJC_Scheduler/AJC_Reminders.py >> $(PROJECT_DIR)/AJC_Scheduler/ajc_log 2>&1 ; source deactivate;" >> $(CRONTAB_OUTFILE)
+	@echo "0 8 * * * source activate $(PROJECT_NAME); python $(PROJECT_DIR)/AJC_Scheduler/AJC_Reminders.py >> $(PROJECT_DIR)/AJC_Scheduler/ajc_log 2>&1 ; source deactivate;" >> $(CRONTAB_MAINFILE)
+	@crontab $(CRONTAB_MAINFILE)
 	@echo ">>> CRONTAB file created! Done!"
 
+## Checks if CRONTAB file exists
+crontab_file: crontab_dir
+	@if test ! -f $(CRONTAB_MAINFILE); then \
+		touch $(CRONTAB_MAINFILE); \
+	fi
+
+## Checks if CRONTAB folder exits
+crontab_dir:
+	@if test ! -d $(CRONTAB_MAINPATH); then \
+		mkdir $(CRONTAB_MAINPATH); \
+	fi
+
+## Cleans the Crontab
+crontab_clean:
+	rm -rf $(CRONTAB_OUTFILE)
+	rm -rf $(CRONTAB_MAINFILE)
+	crontab -r
 
 #################################################################################
 # PROJECT RULES                                                                 #
