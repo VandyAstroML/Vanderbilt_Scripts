@@ -229,7 +229,7 @@ def main():
         sys.exit(0)
 
     ## Defining Weekday and deciding which notice to send
-    if now_dict['weekday'] == 'Tues':
+    if now_dict['weekday'] == 'Mon':
         sendAstroLunchNotice(now_dict)
         sys.stderr.write(post_success)
     elif now_dict['weekday'] == 'Wed':
