@@ -83,7 +83,8 @@ def sendpost(blog_content):
     status_draft = 0
     status_published = 1
     # Initializing server
-    server = xmlrpc.ServerProxy(wp_url)
+    
+    server = ServerProxy(wp_url)
     # Posing to Wordpress
     post_id = server.metaWeblog.newPost(wp_blogid,
                                         wp_username,
@@ -107,10 +108,14 @@ def sendAstroLunchNotice(now_dict):
                     now_dict['month'],
                     now_dict['day'])
     # Blog - Content
-    content = string.join((
+    content = "\r\n".join((
         'AstroLunch meets every Tuesday at noon in Stevenson Center 6333. ', 
         '<a href="http://vanderbiltastro.pbworks.com/w/page/12546270/AstroLunch"> Check here for the schedule.</a>'
-        ), "\r\n")
+        ))
+    # content = string.join((
+    #     'AstroLunch meets every Tuesday at noon in Stevenson Center 6333. ', 
+    #     '<a href="http://vanderbiltastro.pbworks.com/w/page/12546270/AstroLunch"> Check here for the schedule.</a>'
+    #     ), "\r\n")
     # Blog - Details
     categories = ["Events"]
     blog_content = {'title': title, 'description': content, 'categories': categories}
