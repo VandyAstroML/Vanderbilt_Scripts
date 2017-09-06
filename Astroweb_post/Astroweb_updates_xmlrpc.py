@@ -27,7 +27,7 @@ because the wordpress editor's password is in plain text in the script!!
 import string
 import datetime
 import time
-from xmlrpc.client import ServerProxy
+import xmlrpc.client as client
 import xmlrpc
 import sys
 import os
@@ -85,7 +85,7 @@ def sendpost(blog_content):
     status_published = 1
     # Initializing server
 
-    server = ServerProxy(wp_url)
+    server = client.ServerProxy(wp_url)
     # Posing to Wordpress
     post_id = server.metaWeblog.newPost(wp_blogid,
                                         wp_username,
@@ -139,10 +139,10 @@ def sendAJCNotice(now_dict):
                     now_dict['month'],
                     now_dict['day'])
     # Blog - Content
-    content = string.join((
+    content = "\r\n".join((
         'Astronomy Journal Club meets every Wednesday at noon in Stevenson Center 6333. ', 
         '<a href="http://as.vanderbilt.edu/astronomy/category/journal-club/"> Check here for the full schedule.</a>'
-        ), "\r\n")
+        ))
     # Blog - Details
     categories   = ["Events"]
     blog_content = {'title': title, 'description': content, 'categories': categories}
@@ -165,14 +165,14 @@ def sendAstroBrewNotice(now_dict):
                     now_dict['month'],
                     now_dict['day'])
     # Blog - Content
-    content = string.join((
+    content = "\r\n".join((
             "AstroBrew is a variant of the AstroCoffee related meetings that the department has had in the past.\n", 
             "The guideline of the AstroBrew are:\n1) 30 min. Maximum.\n2) Agenda is clear: 2-3 papers will be discussed.\n",
             "3) Initially, each paper will be presented by a postdoc. ", 
             "Soon, we will open up opportunities for Graduate Students once the meeting has momentum.\n", 
             "4) The goal here is simple: maximum information dissemination. The short talks will be 10-15 min presentations of interesting papers.\n", 
             "5) Conversation will be kept on topic. We will get through the main points of the paper quickly.\n6) We will cover a variety of topics.\n"
-            ), "\r\n")
+            ))
     # Blog - Details
     categories   = ["Events"]
     blog_content = {'title': title, 'description': content, 'categories': categories}
