@@ -59,6 +59,7 @@ remove_environment:
 ifeq (True,$(HAS_CONDA))
 		@echo ">>> Detected conda, removing conda environment"
 		conda env remove -n $(PROJECT_NAME)
+endif
 
 ## Create crontab file to attach
 crontab_create: crontab_file
