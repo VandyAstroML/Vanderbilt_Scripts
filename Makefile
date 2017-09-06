@@ -40,7 +40,7 @@ lint:
 	flake8 --exclude=lib/,bin/,docs/conf.py .
 
 ## Set up python interpreter environment
-create_environment:
+environment:
 ifeq (True,$(HAS_CONDA))
 		@echo ">>> Detected conda, creating conda environment."
 		conda config --add channels conda-forge
