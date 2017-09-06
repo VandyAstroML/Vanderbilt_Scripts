@@ -54,6 +54,12 @@ ifeq (True,$(HAS_CONDA))
 		conda env update -f $(ENVIRONMENT_FILE)
 endif
 
+## Delte python interpreter environment
+remove_environment:
+ifeq (True,$(HAS_CONDA))
+		@echo ">>> Detected conda, removing conda environment"
+		conda env remove -n $(PROJECT_NAME)
+
 ## Create crontab file to attach
 crontab_create: crontab_file
 	@echo "0 7 * * * source activate $(PROJECT_NAME); python $(PROJECT_DIR)/Astroweb_post/Astroweb_updates_xmlrpc.py >> $(PROJECT_DIR)/Astroweb_post/updatelog2 2>&1 ; source deactivate;" > $(CRONTAB_OUTFILE)
