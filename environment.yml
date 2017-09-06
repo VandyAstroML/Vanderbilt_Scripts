@@ -12,3 +12,4 @@ dependencies:
   - html5lib
   - BeautifulSoup4
   - pip
+  - xmlrpc2
