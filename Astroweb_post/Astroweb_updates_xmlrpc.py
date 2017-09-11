@@ -27,8 +27,7 @@ because the wordpress editor's password is in plain text in the script!!
 import string
 import datetime
 import time
-import xmlrpc.client as client
-import xmlrpc
+import xmlrpclib
 import sys
 import os
 
@@ -85,7 +84,7 @@ def sendpost(blog_content):
     status_published = 1
     # Initializing server
 
-    server = client.ServerProxy(wp_url)
+    server = xmlrpclib.ServerProxy(wp_url)
     # Posing to Wordpress
     post_id = server.metaWeblog.newPost(wp_blogid,
                                         wp_username,
