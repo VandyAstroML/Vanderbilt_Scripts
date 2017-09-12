@@ -101,3 +101,4 @@ ENV/
 ### Project-based files
 Astroweb_post/updatelog2
 crontab*.dat
+AJC_Scheduler/ajc_log
