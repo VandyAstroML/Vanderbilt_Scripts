@@ -61,7 +61,7 @@ def assert_env_vars():
     """
     try:
         wp_username = os.environ['wp_username']
-        wp_password = os.environ['wp_username']
+        wp_password = os.environ['wp_password']
     except KeyError:
         msg = '>> `Keyerror`'
         raise ValueError(msg)
