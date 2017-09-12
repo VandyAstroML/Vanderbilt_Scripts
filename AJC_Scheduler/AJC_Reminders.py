@@ -421,10 +421,10 @@ def send_email_PHYS_AJC(ajc_gs_pd, now_dict):
         msg_html += '<head></head>'
         msg_html += '<body>'
         msg_html += '<p>'
-        msg_html += 'Hello AJCers,<br/><br/>'
+        msg_html += 'Hello AJCers (HTML),<br/><br/>'
         msg_html += "This week's AJC will be: <br /><br />"
         if ads_link_match == 1:
-            msg_html += 'Title   : "{0}"<br />'.format(title)
+            msg_html += 'Title            : "{0}"<br />'.format(title)
             msg_html += 'Author  : {0} et al. ({1}<br />'.format(author, year)
             msg_html += 'Link    : {0}<br/>'.format(ads_link)
         msg_html += 'Speaker : {0} {1}<br />'.format( today_info_pd['first_name'],
@@ -442,28 +442,28 @@ def send_email_PHYS_AJC(ajc_gs_pd, now_dict):
         msg_html += '</body>'
         msg_html += '</html>'
         ## Msg - Text
-        msg_html_2  = 'Hello AJCers,\r\n\r\n'
-        msg_html_2 += "This week's AJC will be:\r\n\r\n"
-        if ads_link_match == 1:
-            msg_html_2 += 'Title   : "{0}"\r\n'.format(title)
-            msg_html_2 += 'Author  : {0} et al. ({1})\r\n'.format(author, year)
-            msg_html_2 += 'Link    : {0}\r\n'.format(ads_link)
-        msg_html_2 += 'Speaker : {0} {1}\r\n'.format(today_info_pd['first_name'],
-                                             today_info_pd['last_name'])
-        msg_html_2 += 'Time    : {0} @ 12pm\r\n'.format(today_date_str)
-        msg_html_2 += 'Location: SC 6333\r\n\r\n'
-        msg_html_2 += 'See you all there!\r\n\r\n'
-        msg_html_2 += 'Thanks!\r\n'
-        msg_html_2 += '-'*100 + '\r\n'
-        msg_html_2 += 'Victor Calderon Arrivillaga\r\n'
-        msg_html_2 += 'Ph.D. Candidate in Physics\r\n'
-        msg_html_2 += "Email: victor.calderon@vanderbilt.edu\r\n"
-        msg_html_2 += "Website: http://vcalderon.me\r\n"
+        # msg_html_2  = 'Hello AJCers (Text),\r\n\r\n'
+        # msg_html_2 += "This week's AJC will be:\r\n\r\n"
+        # if ads_link_match == 1:
+        #     msg_html_2 += 'Title   : "{0}"\r\n'.format(title)
+        #     msg_html_2 += 'Author  : {0} et al. ({1})\r\n'.format(author, year)
+        #     msg_html_2 += 'Link    : {0}\r\n'.format(ads_link)
+        # msg_html_2 += 'Speaker : {0} {1}\r\n'.format(today_info_pd['first_name'],
+        #                                      today_info_pd['last_name'])
+        # msg_html_2 += 'Time    : {0} @ 12pm\r\n'.format(today_date_str)
+        # msg_html_2 += 'Location: SC 6333\r\n\r\n'
+        # msg_html_2 += 'See you all there!\r\n\r\n'
+        # msg_html_2 += 'Thanks!\r\n'
+        # msg_html_2 += '-'*100 + '\r\n'
+        # msg_html_2 += 'Victor Calderon Arrivillaga\r\n'
+        # msg_html_2 += 'Ph.D. Candidate in Physics\r\n'
+        # msg_html_2 += "Email: victor.calderon@vanderbilt.edu\r\n"
+        # msg_html_2 += "Website: http://vcalderon.me\r\n"
         ## Adding to `msg`
         part1=MIMEText(msg_html  , 'html')
-        part2=MIMEText(msg_html_2, 'text')
+        # part2=MIMEText(msg_html_2, 'text')
         msg.attach(part1)
-        msg.attach(part2)
+        # msg.attach(part2)
         # Sending email
         smtpserver.sendmail(my_email, [to_email, my_email], msg.as_string())
         smtpserver.quit()
