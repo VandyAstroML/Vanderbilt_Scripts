@@ -3,7 +3,7 @@
 ## Description: Runs the commands to run scripts
 ##
 # Activate Environment
-env_name=vandyscripts
+env_name='vandyscripts'
 activate=`which activate`
 deactivate=`which deactivate`
 my_dir=`pwd`
