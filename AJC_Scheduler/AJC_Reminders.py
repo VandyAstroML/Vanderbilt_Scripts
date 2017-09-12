@@ -421,7 +421,7 @@ def send_email_PHYS_AJC(ajc_gs_pd, now_dict):
         msg_html += '<head></head>'
         msg_html += '<body>'
         msg_html += '<p>'
-        msg_html += 'Hello AJCers (HTML),<br/><br/>'
+        msg_html += 'Hello AJCers,<br/><br/>'
         msg_html += "This week's AJC will be: <br /><br />"
         if ads_link_match == 1:
             msg_html += 'Title            : "{0}"<br />'.format(title)
