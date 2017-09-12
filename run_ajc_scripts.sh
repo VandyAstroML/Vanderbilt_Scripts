@@ -4,6 +4,8 @@
 ##
 # Activate Environment
 env_name='vandyscripts'
+activate=`which activate`
+deactivate=`which deactivate`
 my_dir=`pwd`
 # echo "my_dir: ${my_dir}"
 # echo "source activate ${env_name}"
@@ -11,8 +13,8 @@ my_dir=`pwd`
 # conda env list
 # Run Scripts
 # echo "python ${my_dir}/Astroweb_post/Astroweb_updates_xmlrpc.py >> ${my_dir}/Astroweb_post/updatelog2 2>&1"
-source activate ${env_name} && python ${my_dir}/Astroweb_post/Astroweb_updates_xmlrpc.py >> ${my_dir}/Astroweb_post/updatelog2 2>&1 && source deactivate
+source ${activate} ${env_name} && python ${my_dir}/Astroweb_post/Astroweb_updates_xmlrpc.py >> ${my_dir}/Astroweb_post/updatelog2 2>&1 && source ${deactivate}
 # echo   "python ${my_dir}/AJC_Scheduler/AJC_Reminders.py >> ${my_dir}/AJC_Scheduler/ajc_log 2>&1"
-source activate ${env_name} && python ${my_dir}/AJC_Scheduler/AJC_Reminders.py >> ${my_dir}/AJC_Scheduler/ajc_log 2>&1 && source deactivate
+source ${activate} ${env_name} && python ${my_dir}/AJC_Scheduler/AJC_Reminders.py >> ${my_dir}/AJC_Scheduler/ajc_log 2>&1 && source ${deactivate}
 # Deactivating Environment
 # source deactivate
