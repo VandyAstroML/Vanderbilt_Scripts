@@ -8,7 +8,7 @@ my_dir=`pwd`
 # echo "my_dir: ${my_dir}"
 # echo "source activate ${env_name}"
 source activate ${env_name}
-conda env list
+# conda env list
 # Run Scripts
 # echo "python ${my_dir}/Astroweb_post/Astroweb_updates_xmlrpc.py >> ${my_dir}/Astroweb_post/updatelog2 2>&1"
 python ${my_dir}/Astroweb_post/Astroweb_updates_xmlrpc.py >> ${my_dir}/Astroweb_post/updatelog2 2>&1
