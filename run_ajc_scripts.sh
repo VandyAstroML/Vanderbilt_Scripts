@@ -6,7 +6,8 @@
 # source $(HOME)/.bashrc
 # dirpath=eval echo "~$different_user"
 echo "directory: $(dirname $0)"
-echo "pwd: $(`pwd`)"
+pwd_var=`pwd`
+echo "pwd: $(`pwd_var`)"
 # echo "$(dirname $(readlink -e $dirpath))/$(basename $dirpath)"
 # echo "${dirpath}"
 
