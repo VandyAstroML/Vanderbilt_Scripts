@@ -9,8 +9,8 @@ activate='/home/caldervf/anaconda3/envs/vandyscripts/bin/activate'
 deactivate='/home/caldervf/anaconda3/envs/vandyscripts/bin/deactivate'
 # activate=`which activate`
 # deactivate=`which deactivate`
-# my_dir=`pwd`
-my_dir='/home/caldervf/Repositories/Vanderbilt_Scripts'
+my_dir=`pwd`
+# my_dir='/home/caldervf/Repositories/Vanderbilt_Scripts'
 # echo "my_dir: ${my_dir}"
 echo "source ${activate} ${env_name}"
 source ${activate} ${env_name}
