@@ -3,8 +3,9 @@
 ## Description: Runs the commands to run scripts
 ##
 # Activate Environment
+source $(HOME)/.bashrc
 dirpath=eval echo "~$different_user"
-echo "$(dirname $(readlink -e $dirpath))/$(basename $dirpath)"
+# echo "$(dirname $(readlink -e $dirpath))/$(basename $dirpath)"
 echo "${dirpath}"
 
 # source /home/caldervf/.bashrc
