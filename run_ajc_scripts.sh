@@ -14,6 +14,9 @@ echo "$home_dir"
 echo "$home_dir/.bashrc"
 echo "$(which activate)"
 
+# Sourcing
+source $home_dir/.bashrc
+
 
 
 
