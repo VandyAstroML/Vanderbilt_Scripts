@@ -5,7 +5,8 @@
 # Activate Environment
 # source $(HOME)/.bashrc
 # dirpath=eval echo "~$different_user"
-echo "$(dirname $0)"
+echo "$(directory: dirname $0)"
+echo "$("pwd": `pwd`)"
 # echo "$(dirname $(readlink -e $dirpath))/$(basename $dirpath)"
 # echo "${dirpath}"
 
