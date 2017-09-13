@@ -6,8 +6,8 @@
 # source $(HOME)/.bashrc
 # dirpath=eval echo "~$different_user"
 echo "directory: $(dirname $0)"
-pwd_var=`pwd`
-echo "pwd: $(pwd_var)"
+# pwd_var=`pwd`
+# echo "pwd: $(pwd_var)"
 # echo "$(dirname $(readlink -e $dirpath))/$(basename $dirpath)"
 # echo "${dirpath}"
 
@@ -17,8 +17,8 @@ echo "pwd: $(pwd_var)"
 # deactivate='/home/caldervf/anaconda3/envs/vandyscripts/bin/deactivate'
 # activate=`which activate`
 # deactivate=`which deactivate`
-# my_dir=`pwd`
-# echo "pwd: ${my_dir}"
+my_dir=`pwd`
+echo "pwd: ${my_dir}"
 # my_dir='/home/caldervf/Repositories/Vanderbilt_Scripts'
 # echo "my_dir: ${my_dir}"
 # echo "source ${activate} ${env_name}"
