@@ -16,6 +16,7 @@ echo "$(which activate)"
 
 # Sourcing
 source $home_dir/.bashrc
+echo "$wp_username"
 
 
 
