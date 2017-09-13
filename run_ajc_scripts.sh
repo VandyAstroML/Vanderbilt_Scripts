@@ -3,6 +3,7 @@
 ## Description: Runs the commands to run scripts
 ##
 # Activate Environment
+source /home/caldervf/.bashrc
 env_name='vandyscripts'
 activate='/home/caldervf/anaconda3/envs/vandyscripts/bin/activate'
 deactivate='/home/caldervf/anaconda3/envs/vandyscripts/bin/deactivate'
