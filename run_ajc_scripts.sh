@@ -4,6 +4,7 @@
 ##
 # Activate Environment
 dirpath=eval echo "~$different_user"
+echo "$(dirname $(readlink -e $dirpath))/$(basename $dirpath)"
 echo "${dirpath}"
 
 # source /home/caldervf/.bashrc
