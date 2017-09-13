@@ -5,8 +5,9 @@
 # Activate Environment
 # source $(HOME)/.bashrc
 dirpath=eval echo "~$different_user"
-echo "$(dirname $(readlink -e $dirpath))/$(basename $dirpath)"
-echo "${dirpath}"
+echo "$(readlink -e $(dirpath))"
+# echo "$(dirname $(readlink -e $dirpath))/$(basename $dirpath)"
+# echo "${dirpath}"
 
 # source /home/caldervf/.bashrc
 # env_name='vandyscripts'
