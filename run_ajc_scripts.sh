@@ -9,9 +9,9 @@ proj_dir=`dirname $0`
 ## Description: Runs the commands to run scripts
 ##
 # Sourcing profile
-echo "$(proj_dir)"
-echo "$(home_dir)"
-echo "$(home_dir)/.bashrc"
+echo "$proj_dir"
+echo "$home_dir"
+echo "$home_dir/.bashrc"
 echo "$(which activate)"
 
 
