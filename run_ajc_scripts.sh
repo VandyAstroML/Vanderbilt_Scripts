@@ -17,10 +17,8 @@ ENV_NAME="vandyscripts"
 # Sourcing profile
 if [[ $ostype == "Linux" ]]; then
     source $home_dir/.bashrc
-    # echo "source bashrc"
 else
     source $home_dir/.bashprofile
-    # echo "source bashprofile"
 fi
 # Activating Environment
 activate=`which activate`
