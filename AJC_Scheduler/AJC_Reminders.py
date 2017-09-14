@@ -138,7 +138,7 @@ def ajc_url_creator(now_dict):
 
     return ajc_url
 
-def ajc_parser(ajc_url):
+def ajc_parser(ajc_url, reminder_day=2, physajc_day=1):
     """
     Parses the information from `ajc_url`
 
@@ -146,6 +146,18 @@ def ajc_parser(ajc_url):
     ----------
     ajc_url: string
         URL of the current AJC string
+
+    reminder_day: int, optional (default = 2)
+        number of days `prior` to AJC to send email reminder to speaker
+
+    physajc_day: int, optional (default = 1)
+        number of days `prior` to AJC to send email to PHYS_AJC mailing list.
+
+    Return
+    ----------
+    ajc_pd: pandas DataFrame
+        DataFrame containing info about 1) AJC date, 2) Title, 3) Speaker,
+        4) Reminder date, 5) Date to send email to mailing list.
     """
     # Reading URL
     ajc_pd = pd.read_html(ajc_url, header=0)[0]
@@ -161,9 +173,9 @@ def ajc_parser(ajc_url):
         speaker_arr[jj] = '_'.join(speaker_jj.split()[::-1])
     ajc_pd['Speaker'] = speaker_arr
     # Adding Date for Reminders
-    ajc_pd['Reminders']  = ajc_pd['Date'] - pd.Timedelta(2, 'D')
+    ajc_pd['Reminders']  = ajc_pd['Date'] - pd.Timedelta(reminder_day, 'D')
     # Send email dates
-    ajc_pd['Send_email'] = ajc_pd['Date'] - pd.Timedelta(1, 'D')
+    ajc_pd['Send_email'] = ajc_pd['Date'] - pd.Timedelta(physajc_day, 'D')
     # Making Speaker the index
     ajc_pd = ajc_pd.set_index('Speaker')
 
