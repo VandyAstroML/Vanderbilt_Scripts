@@ -26,6 +26,7 @@ echo "$activate"
 echo "$deactivate"
 
 source $activate "vandyscripts"
+echo $CONDA_DEFAULT_ENV
 
 
 
