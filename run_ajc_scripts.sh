@@ -12,20 +12,25 @@ echo "$ostype"
 ## Description: Runs the commands to run scripts
 ##
 # Sourcing profile
+if [[ $ostype == "Linux" ]]; then
+    echo "source bashrc"
+else
+    echo "source bashprofile"
+fi
 
 
 
 
 
 
-echo "$proj_dir"
-echo "$home_dir"
-echo "$home_dir/.bashrc"
-echo "$(which activate)"
+# echo "$proj_dir"
+# echo "$home_dir"
+# echo "$home_dir/.bashrc"
+# echo "$(which activate)"
 
-# Sourcing
-source $home_dir/.bashrc
-echo "$wp_username"
+# # Sourcing
+# source $home_dir/.bashrc
+# echo "$wp_username"
 
 
 
