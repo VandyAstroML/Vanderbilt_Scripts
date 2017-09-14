@@ -27,7 +27,7 @@ source $activate $ENV_NAME
 # cd into Script Directory
 cd $proj_dir
 # Run Astro Website Script
-python Astroweb_post/Astroweb_updates_xmlrpc.py >> Astroweb_post/updatelog2 2>&1
+# python Astroweb_post/Astroweb_updates_xmlrpc.py >> Astroweb_post/updatelog2 2>&1
 # Run AJC Script
 python AJC_Scheduler/AJC_Reminders.py >> AJC_Scheduler/ajc_log 2>&1
 # Deactivating Environment
