@@ -13,9 +13,11 @@ echo "$ostype"
 ##
 # Sourcing profile
 if [[ $ostype == "Linux" ]]; then
-    echo "source bashrc"
+    source $home_dir/.bashrc
+    # echo "source bashrc"
 else
-    echo "source bashprofile"
+    source $home_dir/.bashprofile
+    # echo "source bashprofile"
 fi
 
 
