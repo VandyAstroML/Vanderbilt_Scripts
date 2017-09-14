@@ -4,9 +4,9 @@
 
 ### --- Variables
 # Home Directory
-home_dir=`pwd`
-homedir2=`eval echo "~$different_user"`
-echo "$homedir2"
+# home_dir=`pwd`
+home_dir=`eval echo "~$different_user"`
+echo "$home_dir"
 # Project directory
 proj_dir=`dirname $0`
 # Type of OS
