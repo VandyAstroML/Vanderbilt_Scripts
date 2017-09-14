@@ -61,32 +61,6 @@ ifeq (True,$(HAS_CONDA))
 		conda env remove -n $(PROJECT_NAME)
 endif
 
-## Create crontab file to attach
-crontab_create: crontab_file
-	@echo "0 7 * * * source activate $(PROJECT_NAME); python $(PROJECT_DIR)/Astroweb_post/Astroweb_updates_xmlrpc.py >> $(PROJECT_DIR)/Astroweb_post/updatelog2 2>&1 ; source deactivate;" > $(CRONTAB_OUTFILE)
-	@echo "0 7 * * * source activate $(PROJECT_NAME); python $(PROJECT_DIR)/Astroweb_post/Astroweb_updates_xmlrpc.py >> $(PROJECT_DIR)/Astroweb_post/updatelog2 2>&1 ; source deactivate;" >> $(CRONTAB_MAINFILE)
-	@echo "0 8 * * * source activate $(PROJECT_NAME); python $(PROJECT_DIR)/AJC_Scheduler/AJC_Reminders.py >> $(PROJECT_DIR)/AJC_Scheduler/ajc_log 2>&1 ; source deactivate;" >> $(CRONTAB_OUTFILE)
-	@echo "0 8 * * * source activate $(PROJECT_NAME); python $(PROJECT_DIR)/AJC_Scheduler/AJC_Reminders.py >> $(PROJECT_DIR)/AJC_Scheduler/ajc_log 2>&1 ; source deactivate;" >> $(CRONTAB_MAINFILE)
-	@crontab $(CRONTAB_MAINFILE)
-	@echo ">>> CRONTAB file created! Done!"
-
-## Checks if CRONTAB file exists
-crontab_file: crontab_dir
-	@if test ! -f $(CRONTAB_MAINFILE); then \
-		touch $(CRONTAB_MAINFILE); \
-	fi
-
-## Checks if CRONTAB folder exits
-crontab_dir:
-	@if test ! -d $(CRONTAB_MAINPATH); then \
-		mkdir $(CRONTAB_MAINPATH); \
-	fi
-
-## Cleans the Crontab
-crontab_clean:
-	rm -rf $(CRONTAB_OUTFILE)
-	rm -rf $(CRONTAB_MAINFILE)
-	crontab -r
 
 #################################################################################
 # PROJECT RULES                                                                 #
