@@ -86,7 +86,7 @@ The file `run_ajc_scripts.sh` has the necessary commands to run the scripts.
 All you have to do is to add the following to your current _crontab_ file:
 
 ```
-* 7 * * * /path/to/run_ajc_scripts.sh
+0 7 * * * /path/to/run_ajc_scripts.sh
 ```
 
 This will run `run_ajc_scripts.sh` every day at 7am.
@@ -103,7 +103,7 @@ root                  *  /path/to/anaconda/
 ```
 
 #### Crontab file
-If you don't have a _crontab_ file, you can add the command `* 7 * * * /path/to/run_ajc_scripts.sh` to the crontab file, after you have typed:
+If you don't have a _crontab_ file, you can add the command `0 7 * * * /path/to/run_ajc_scripts.sh` to the crontab file, after you have typed:
 
 ```
 $: crontab -e
