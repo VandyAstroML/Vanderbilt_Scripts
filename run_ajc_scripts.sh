@@ -18,7 +18,7 @@ ENV_NAME="vandyscripts"
 if [[ $ostype == "Linux" ]]; then
     source $home_dir/.bashrc
 else
-    source $home_dir/.bashprofile
+    source $home_dir/.bash_profile
 fi
 # Activating Environment
 activate=`which activate`
