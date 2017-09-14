@@ -19,6 +19,11 @@ else
     source $home_dir/.bashprofile
     # echo "source bashprofile"
 fi
+# Sourcing activate and deactivate
+activate=`which activate`
+deactivate=`which deactivate`
+echo "$activate"
+echo "$deactivate"
 
 
 
