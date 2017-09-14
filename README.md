@@ -22,7 +22,7 @@ $: 	make show-help
 	clean               Delete all compiled Python files
 	environment         Set up python interpreter environment
 	lint                Lint using flake8
-	remove_environment  Delte python interpreter environment
+	remove_environment  Delete python interpreter environment
 	update_environment  Update python interpreter environment
 ```
 
