@@ -25,6 +25,8 @@ deactivate=`which deactivate`
 echo "$activate"
 echo "$deactivate"
 
+source $activate "vandyscripts"
+
 
 
 
