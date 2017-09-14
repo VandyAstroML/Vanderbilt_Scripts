@@ -358,6 +358,8 @@ def send_email_reminder(ajc_gs_pd, now_dict):
         sys.stderr.write('{0}\t Successfully sent out `Reminder` email!\n'.format(
             now.strftime("%x %a %X")))
     else:
+        ## Updating Log
+        now = datetime.datetime.now()
         sys.stderr.write('{0}\t No email reminders today!\n'.format(
             now.strftime("%x %a %X")))
 
@@ -475,6 +477,8 @@ def send_email_PHYS_AJC(ajc_gs_pd, now_dict):
         sys.stderr.write('{0}\t Successfully sent out `PHYS_AJC` email!\n'.format(
             now.strftime("%x %a %X")))
     else:
+        ## Updating Log
+        now = datetime.datetime.now()
         sys.stderr.write('{0}\t No posts for `PHYS_AJC` today!\n'.format(
             now.strftime("%x %a %X")))
 
