@@ -6,31 +6,50 @@ Repository for storing scripts used by the Vanderbilt Astronomy Department.
 **Date**  : 2017-09-01
 
 ## Installing Environment & Dependencies
-To use the scripts in this repository, you should have _Anaconda_ installed. This will simplify the process of installing all the dependencies.
+To use the scripts in this repository, you must have _Anaconda_ installed on the systems that will be running the scripts. This will simplify the process of installing all the dependencies.
 
 For reference, see: [https://conda.io/docs/user-guide/tasks/manage-environments.html](https://conda.io/docs/user-guide/tasks/manage-environments.html)
 
-* Create the environment from the environment.yml file:
+The package counts with a __Makefile__ with useful functions. You must use this Makefile to ensure that you have all the necessary _dependencies_, as well as the correct _conda environment_. 
+
+* Show all available functions in the _Makefile_
 
 ```
-	make create_environment
+$: 	make show-help
+	
+	Available rules:
+	
+	clean               Delete all compiled Python files
+	environment         Set up python interpreter environment
+	lint                Lint using flake8
+	remove_environment  Delte python interpreter environment
+	update_environment  Update python interpreter environment
 ```
 
-* Activate the new environment:
+* __Create__ the environment from the `environment.yml` file:
+
+```
+	make environment
+```
+
+* __Activate__ the new environment __vandyscripts__.
 
 ```
 	source activate vandyscripts
 ```
-* Deactivate the new environment:
 
-```
-	source deactivate
-```
-* To update the `environment.yml` file (when the required packages have changed):
+* To __update__ the `environment.yml` file (when the required packages have changed):
 
 ```
   make update_environment
 ```
+
+* __Deactivate__ the new environment:
+
+```
+	source deactivate
+```
+
 
 ## Notes
 ### Environment Variables
@@ -43,46 +62,55 @@ To use the scripts in this repository, you __must__ save the following environme
   * `wp_username`: _Username_ for the Astro Wordpress page.
   * `wp_password`: _Password_ for the Astro Wordpress page.
 
-Make sure to store this in your `~/.bashrc` or `~/.bash_profile` as __environment variables__ for the scripts to work. If you don't know these passwords, contact the former person in charge of *AJC*.
+Make sure to store these in your `~/.bashrc` or `~/.bash_profile` as __environment variables__ for the scripts to work. If you don't know these passwords, contact the former person in charge of *AJC*.
 
-### Makefile
-The package counts with a _Makefile_ with useful functions. To see all the functions and their descriptions, type:
+__Example of what to add to your `profile` (.bashrc or .bash_profile) file__:
 
 ```
-$: 	make show-help
-	
-	Available rules:
-	
-	clean               Delete all compiled Python files
-	create_environment  Set up python interpreter environment
-	crontab_clean       Cleans the Crontab
-	crontab_create      Create crontab file to attach
-	crontab_dir         Checks if CRONTAB folder exits
-	crontab_file        Checks if CRONTAB file exists
-	lint                Lint using flake8
-	update_environment  Update python interpreter environment
+### Vanderbilt Scripts
+# AJC
+ajc_user='VUnet ID'; export ajc_user
+ajc_pswd='Password to your VUnet account'; export ajc_pswd
+
+# Wordpress
+wp_username='Username for AJC'; export wp_username
+wp_password='Password for AJC'; export wp_password
 ```
+
+__Note__: Replace the values for __ajc_user__, __ajc_pswd__, __wp_username__, and __wp_password__ with the _real_ values.
 
 ### Regular Schedule
 These scripts are meant to be run on a daily basis. You can do this by setting up a "crontab job". For further reference, see the "[Crontab - Quick Reference ](http://www.adminschoice.com/crontab-quick-reference)".
 
-You can use the `make` functions to _create_ or _remove_ crontab jobs.
-
-__Examples__:
-
-* Using the Makefile functions
-  * `make crontab_create`: Writes `crontab` commands to current `crontab` file to be run at 7am and 8am.
-  * `make crontab_clean`: Cleans the `crontab` file and deletes the `crontab` tasks for the user.
-
-1. `Astroweb_updates_xmlrpc.py`:
-  * The code will run every day at 7am, and it will save the output to the file `updatelog2`.
-```
-	0 7 * * * python /path/to/Astroweb_updates_xmlrpc.py >> /path/to/updatelog2 2>&1
-```
-2. `AJC_Reminder`
-  * The code will run twice daily, one at 8am and another one at 5pm. It calls the project environment `vandyscripts`, and runs the commands.
+The file `run_ajc_scripts.sh` has the necessary commands to run the scripts.
+All you have to do is to add the following to your current _crontab_ file:
 
 ```
-    0 8 * * * source activate vandyscripts; python /path/to/AJC_Reminders.py >> /path/to/ajc_log 2>&1; source deactivate;
-    0 17 * * * source activate vandyscripts; python /path/to/AJC_Reminders.py >> /path/to/ajc_log 2>&1; source deactivate;
+* 7 * * * /path/to/run_ajc_scripts.sh
 ```
+
+This will run `run_ajc_scripts.sh` every day at 7am.
+
+__Note__: Make sure you have had installed the `vandyscripts` conda environment by running `make environment` _before_ you run this bash script.
+
+You can check this by typing:
+
+```
+$: 	conda env list
+
+vandyscripts             /path/to/anaconda/envs/vandyscripts
+root                  *  /path/to/anaconda/
+```
+
+#### Crontab file
+If you don't have a _crontab_ file, you can add the command `* 7 * * * /path/to/run_ajc_scripts.sh` to the crontab file, after you have typed:
+
+```
+$: crontab -e
+```
+
+## Questions
+
+If you have a questions or feedback, please open an _issue_ on Github.
+
+Thanks!
