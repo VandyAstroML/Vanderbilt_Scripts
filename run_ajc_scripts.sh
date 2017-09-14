@@ -6,7 +6,7 @@
 # Home Directory
 home_dir=`pwd`
 homedir2=`eval echo "~$different_user"`
-echo $homedir2
+echo "$homedir2"
 # Project directory
 proj_dir=`dirname $0`
 # Type of OS
