@@ -7,7 +7,7 @@ home_dir=`pwd`
 proj_dir=`dirname $0`
 # Type of OS
 ostype=`uname`
-echo "$uname"
+echo "$ostype"
 
 ## Description: Runs the commands to run scripts
 ##
