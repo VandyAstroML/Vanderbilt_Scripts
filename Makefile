@@ -1,5 +1,4 @@
-.PHONY: clean lint create_environment update_environment crontab_create 
-	crontab_dir crontab_clean
+.PHONY: clean lint create_environment update_environment remove_environment
 
 #################################################################################
 # GLOBALS                                                                       #
