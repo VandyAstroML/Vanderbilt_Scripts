@@ -212,7 +212,7 @@ def main():
     ## Defining `now_dict` dictionary
     now_dict = now_dict_calc()
     ## Defining `post` strings
-    post_success = '{0}\t Successfully poster. :D\n'.format(now_dict['now_str'])
+    post_success = '{0}\t Successfully posted! :D\n'.format(now_dict['now_str'])
     post_ran     = '{0}\t Successfully ran but no post today'.format(
                         now_dict['now_str'])
     # Special Holidays
