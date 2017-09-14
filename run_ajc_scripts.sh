@@ -5,10 +5,19 @@
 home_dir=`pwd`
 # Project directory
 proj_dir=`dirname $0`
+# Type of OS
+ostype=`uname`
+echo "$uname"
 
 ## Description: Runs the commands to run scripts
 ##
 # Sourcing profile
+
+
+
+
+
+
 echo "$proj_dir"
 echo "$home_dir"
 echo "$home_dir/.bashrc"
@@ -17,6 +26,8 @@ echo "$(which activate)"
 # Sourcing
 source $home_dir/.bashrc
 echo "$wp_username"
+
+
 
 
 
