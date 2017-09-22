@@ -201,6 +201,7 @@ def graduate_students_parser():
             gs_pd_temp = gs_ii[1]
         else:
             gs_pd_temp = gs_pd_temp.append(gs_ii[1], ignore_index=True)
+    gs_pd_temp = gs_pd_temp.dropna().reset_index(drop=True)
     n_students = gs_pd_temp.shape[0]
     ## Parsing fields
     list_st = [[] for x in range(n_students)]
