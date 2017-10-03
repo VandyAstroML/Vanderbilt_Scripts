@@ -457,7 +457,7 @@ def send_email_PHYS_AJC(ajc_gs_pd, now_dict):
         msg_html += "This week's AJC will be: <br /><br />"
         if ads_link_match == 1:
             msg_html += 'Title            : "{0}"<br />'.format(title)
-            msg_html += 'Author  : {0} et al. ({1}<br />'.format(author, year)
+            msg_html += 'Author  : {0} et al. ({1})<br />'.format(author, year)
             msg_html += 'Link    : {0}<br/>'.format(ads_link)
         msg_html += 'Speaker : {0} {1}<br />'.format( today_info_pd['first_name'],
                                             today_info_pd['last_name'])
