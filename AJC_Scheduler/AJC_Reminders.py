@@ -30,16 +30,23 @@ import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 
-def ADS_Query(title, author, year, arxiv_id):
+def ADS_Query(author, year, arxiv_id):
     """
     Performs an ADS query on the `title` for AJC
 
     Parameters
     ----------
-    title: string
-        title of the paper to be looked for on ADS
+    author: string
+        1st author (last name) of the paper
 
-    Return
+    year: string
+        year of the paper to be looked for on ADS
+
+    arxiv_id: int
+        ArXiv ID of the paper to be looked at
+
+    Returns
+    -------
     paper_dict: python dictionary
         dictionary with information on the paper
     """
@@ -302,7 +309,7 @@ def send_email_reminder(ajc_gs_pd, now_dict):
 
     Parameters
     -----------
-    ajd_gs_pd: pandas DataFrame
+    ajc_gs_pd: pandas DataFrame
         merged DataFrame between `ajc_pd` and `gs_pd`
         Keys: `email`, `Date`, `Reminders`.
         Index is set to `firstname_lastname` of student.
@@ -433,7 +440,7 @@ def send_email_PHYS_AJC(ajc_gs_pd, now_dict):
                                                       today_date,
                                                       today_year)
         ## ADS Query
-        ads_link, ads_link_match = ADS_Query(title, author, year, arxiv_id)
+        ads_link, ads_link_match = ADS_Query(author, year, arxiv_id)
         ## Composing message
         msg_html  = '<html>'
         msg_html += '<head></head>'
@@ -494,6 +501,25 @@ def send_email_PHYS_AJC(ajc_gs_pd, now_dict):
         now = datetime.datetime.now()
         sys.stderr.write('{0}\t No posts for `PHYS_AJC` today!\n'.format(
             now.strftime("%x %a %X")))
+
+def ADS_Testing(ajc_gs_pd, now_dict):
+    """
+    Tests if paper can be obtain from each paper in AJC
+
+    Parameters
+    -----------
+    ajc_gs_pd: pandas DataFrame
+        merged DataFrame between `ajc_pd` and `gs_pd`
+        Keys: `email`, `Date`, `Reminders`.
+        Index is set to `firstname_lastname` of student.
+
+    now_dict: python dictionary
+        dictionary with `year`, `weekday`, `month`, `day` entries
+    """
+    ## Today's Timestamp
+    today_pd = pd.Timestamp('{0}/{1}/{2}'.format(now_dict['month'],
+                                                 now_dict['day'],
+                                                 now_dict['year']))
 
 def main():
     """
