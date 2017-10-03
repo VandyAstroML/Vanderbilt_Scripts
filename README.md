@@ -41,7 +41,7 @@ $: 	make show-help
 * To __update__ the `environment.yml` file (when the required packages have changed):
 
 ```
-  make update_environment
+	make update_environment
 ```
 
 * __Deactivate__ the new environment:
@@ -56,7 +56,7 @@ $: 	make show-help
 To use the scripts in this repository, you __must__ save the following environment variables:
 
 1. `AJC_Reminders`
-  * `ajc_user`: Vanderbilt VUnet ID. This is used as the _user_ for sending email addresses.
+  * `ajc_user`: Vanderbilt VUnet ID. This is used as the _user_ for sending emails.
   * `ajc_pswd`: Password for you vanderbilt email address.
 2. `Astroweb_updates_xmlrpc`
   * `wp_username`: _Username_ for the Astro Wordpress page.
