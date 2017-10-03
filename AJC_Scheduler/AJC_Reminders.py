@@ -24,6 +24,7 @@ import pandas as pd
 
 # Extra-modules
 import ads
+import arxiv
 import datetime
 import requests
 import smtplib
@@ -58,18 +59,24 @@ def ADS_Query(author, year, arxiv_id):
     papers = list(ads.SearchQuery(arXiv=arxiv_id, first_author=author, year=year,
                 fl=['title','author','year','doi','identifier',
                     'first_author']))
-    assert(len(papers)==1)
-    paper = papers[0]
-    # Adding link
-    arXiv_identifier = np.unique([s for s in paper.identifier if 'arXiv' in s])
-    ads_link = 'http://adsabs.harvard.edu/abs/' + arXiv_identifier[0]
+    if len(papers)==1:
+        paper = papers[0]
+        # Adding link
+        arXiv_identifier = np.unique([s for s in paper.identifier if 'arXiv' in s])
+        paper_link = 'http://adsabs.harvard.edu/abs/' + arXiv_identifier[0]
+    else:
+        ## Using arxiv API instead
+        papers = arxiv.query(id_list=[arxiv_id])
+        paper  = papers[0]
+        paper_link = paper['arxiv_url']
+    ## Checking if URL exists
     try:
-        url_checker(ads_link)
-        ads_link_match = 1
+        url_checker(paper_link)
+        paper_link_match = 1
     except MissingSchema:
-        ads_link_match = 0
+        paper_link_match = 0
 
-    return ads_link, ads_link_match
+    return paper_link, paper_link_match
 
 def datetime_dict():
     """
