@@ -442,7 +442,7 @@ def send_email_PHYS_AJC(ajc_gs_pd, now_dict):
         today_date     = today_datetime.strftime("%d")
         today_year     = today_datetime.strftime("%Y")
         today_weekday  = today_datetime.strftime("%A")
-        today_date_str = '{0}, {1} {2}th, {3}'.format(today_weekday,
+        today_date_str = '{0}, {1} {2}, {3}'.format(today_weekday,
                                                       today_month,
                                                       today_date,
                                                       today_year)
