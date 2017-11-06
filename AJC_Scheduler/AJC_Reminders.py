@@ -352,7 +352,7 @@ def send_email_reminder(ajc_gs_pd, now_dict):
         msg_html += '<p>'
         msg_html += 'Hi {0},<br /><br />'.format(today_info_pd.first_name)
         msg_html += 'Could you please send me the name and arXiv link to the '
-        msg_html += 'paper that you’ll be presenting at AJC? <br /><br />'
+        msg_html += 'paper that you will be presenting at AJC? <br /><br />'
         msg_html += 'Thanks!<br />'
         msg_html += '-'*130 + '<br />'
         msg_html += 'Victor Calderon Arrivillaga<br />'
