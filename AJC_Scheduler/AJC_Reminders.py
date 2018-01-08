@@ -135,7 +135,6 @@ def ajc_url_creator(now_dict):
     if int(now_dict['month']) in Spring_months:
         sem_str = 'spring'
         sem_num = '01'
-        sem_num = '12'
     elif int(now_dict['month']) in Fall_months:
         sem_str = 'fall'
         sem_num = '08'
