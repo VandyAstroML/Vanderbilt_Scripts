@@ -56,10 +56,18 @@ def ADS_Query(author, year, arxiv_id):
     # Configuring Token
     ads.config.token = ADS_token
     # Searching for Paper
-    papers = list(ads.SearchQuery(arXiv=arxiv_id, first_author=author, year=year,
-                fl=['title','author','year','doi','identifier',
-                    'first_author']))
-    if len(papers)==1:
+    try:
+        papers = list(ads.SearchQuery(arXiv=arxiv_id, first_author=author, year=year,
+                    fl=['title','author','year','doi','identifier',
+                        'first_author']))
+        ## Which platform to use
+        ads_opt = True
+    except:
+        ads_opt = False
+        papers  = []
+    ##
+    ## Getting paper info
+    if ads_opt and (len(papers) == 1):
         paper = papers[0]
         # Adding link
         arXiv_identifier = np.unique([s for s in paper.identifier if 'arXiv' in s])
