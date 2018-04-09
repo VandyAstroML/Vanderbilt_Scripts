@@ -52,7 +52,7 @@ def ADS_Query(author, year, arxiv_id):
         dictionary with information on the paper
     """
     # Token form 'https://ui.adsabs.harvard.edu/#user/settings/token'
-    ADS_token = 'IRj3DUCOdySOFSrqFu61WicS5PmphLFZcnZljrSo'
+    ADS_token = 'hRgSJWx0VXqjAaVX5ReNfLYOTsYXcpfBpawkl9iF'
     # Configuring Token
     ads.config.token = ADS_token
     # Searching for Paper
@@ -67,22 +67,26 @@ def ADS_Query(author, year, arxiv_id):
         papers  = []
     ##
     ## Getting paper info
-    if ads_opt and (len(papers) == 1):
-        paper = papers[0]
-        # Adding link
-        arXiv_identifier = np.unique([s for s in paper.identifier if 'arXiv' in s])
-        paper_link = 'http://adsabs.harvard.edu/abs/' + arXiv_identifier[0]
+    if arxiv_id != '':
+        if ads_opt and (len(papers) == 1):
+            paper = papers[0]
+            # Adding link
+            arXiv_identifier = np.unique([s for s in paper.identifier if 'arXiv' in s])
+            paper_link = 'http://adsabs.harvard.edu/abs/' + arXiv_identifier[0]
+        else:
+            ## Using arxiv API instead
+            papers = arxiv.query(id_list=[arxiv_id])
+            paper  = papers[0]
+            paper_link = paper['arxiv_url']
+        ## Checking if URL exists
+        try:
+            url_checker(paper_link)
+            paper_link_match = 1
+        except MissingSchema:
+            paper_link_match = 0
     else:
-        ## Using arxiv API instead
-        papers = arxiv.query(id_list=[arxiv_id])
-        paper  = papers[0]
-        paper_link = paper['arxiv_url']
-    ## Checking if URL exists
-    try:
-        url_checker(paper_link)
-        paper_link_match = 1
-    except MissingSchema:
         paper_link_match = 0
+        paper_link       = ''
 
     return paper_link, paper_link_match
 
