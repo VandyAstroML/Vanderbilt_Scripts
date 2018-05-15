@@ -216,14 +216,17 @@ def main():
     post_ran     = '{0}\t Successfully ran but no post today\n'.format(
                         now_dict['now_str'])
     # Special Holidays
-    post_thanksg = '{0}\t Thanksgiving Break. No Post today. :|\n'.format(
+    post_thanksg  = '{0}\t Thanksgiving Break. No Post today. :|\n'.format(
                         now_dict['now_str'])
-    post_spring  = '{0}\t Spring Break. No Post today. :|\n'.format(
+    post_spring   = '{0}\t Spring Break. No Post today. :|\n'.format(
+                        now_dict['now_str'])
+    post_summer   = '{0}\t Summer Break. No Post today. :|\n'.format(
                         now_dict['now_str'])
 
     ## EDIT THIS ONCE PER YEAR
     thanksg_dates = list(range(20,25))
     spring_dates  = list(range( 5,10))
+    summer_dates  = ['May','Jun','Jul']
     # Thanksgiving
     if (now_dict['weekday'] in thanksg_dates) and now_dict['month']=='Nov':
         sys.stderr.write(post_thanksg)
@@ -231,6 +234,10 @@ def main():
     # Spring Break
     if (now_dict['weekday'] in spring_dates) and now_dict['month']=='Mar':
         sys.stderr.write(post_spring)
+        sys.exit(0)
+    # Summer
+    if (now_dict['month'] in summer_dates):
+        sys.stderr.write(post_summer)
         sys.exit(0)
 
     ## Defining Weekday and deciding which notice to send
