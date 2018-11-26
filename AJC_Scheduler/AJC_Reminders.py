@@ -80,9 +80,9 @@ def ADS_Query(author, year, arxiv_id):
             paper_link = paper['arxiv_url']
         ## Checking if URL exists
         try:
-            url_checker(paper_link)
+            # url_checker(paper_link)
             paper_link_match = 1
-        except MissingSchema:
+        except:
             paper_link_match = 0
     else:
         paper_link_match = 0
