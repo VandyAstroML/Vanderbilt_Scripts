@@ -17,4 +17,4 @@ dependencies:
   - pip
   - pip:
     - arxiv
-    - xmlrpclib
+    # - xmlrpclib
