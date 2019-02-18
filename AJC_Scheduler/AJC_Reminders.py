@@ -19,7 +19,7 @@ import os
 import sys
 import sys
 # reload(sys)
-sys.setdefaultencoding('utf8')
+# sys.setdefaultencoding('utf8')
 import pandas as pd
 
 # Extra-modules
