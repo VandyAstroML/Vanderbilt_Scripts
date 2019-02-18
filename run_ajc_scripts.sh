@@ -29,4 +29,4 @@ python AJC_Scheduler/AJC_Reminders.py >> AJC_Scheduler/ajc_log 2>&1
 # Run Astro Website Script
 # python Astroweb_post/Astroweb_updates_xmlrpc.py >> Astroweb_post/updatelog2 2>&1
 # Deactivating Environment
-source deactivate
+conda deactivate
