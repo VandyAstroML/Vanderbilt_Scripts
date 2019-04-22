@@ -475,7 +475,7 @@ def send_email_PHYS_AJC(ajc_gs_pd, now_dict):
         msg_html += 'Speaker : {0} {1}<br />'.format( today_info_pd['first_name'],
                                             today_info_pd['last_name'])
         msg_html += 'Time    : {0} @ 12pm<br />'.format(today_date_str)
-        msg_html += 'Location: SC 6333<br /><br />'
+        msg_html += 'Location: SC 6322<br /><br />'
         msg_html += 'See you all there!<br /><br />'
         msg_html += 'Thanks!<br />'
         msg_html += '-'*130 + '<br />'
