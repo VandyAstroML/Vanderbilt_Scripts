@@ -9,7 +9,6 @@ dependencies:
   - ipython
   - numpy
   - pandas
-  - ads
   - requests
   - lxml
   - html5lib
@@ -17,4 +16,5 @@ dependencies:
   - pip
   - pip:
     - arxiv
+    - ads
     # - xmlrpclib
