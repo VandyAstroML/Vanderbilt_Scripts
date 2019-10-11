@@ -98,6 +98,10 @@ ENV/
 # mypy
 .mypy_cache/
 
+# Mac-specific
+.DS_Store
+*.DS_Store
+
 ### Project-based files
 Astroweb_post/updatelog2
 crontab*.dat
