@@ -289,7 +289,6 @@ def send_email_reminder(ajc_gs_pd, now_dict):
             today_info_pd  = today_ajc_pd.iloc[0]
             ## Email details
             to_email = today_info_pd['email']
-            # to_email = 'victor.calderon90@gmail.com'
             ## Logging in to Server
             smtpserver, my_email = email_init(email_type='vandy')
             # Create message container - the correct MIME type is multipart/alternative.
@@ -342,7 +341,6 @@ def send_email_reminder(ajc_gs_pd, now_dict):
             today_info_pd  = today_ajc_pd.iloc[0]
             ## Email details
             to_email = os.environ.get('vandy_email')
-            # to_email = 'victor.calderon90@gmail.com'
             ## Logging in to Server
             smtpserver, my_email = email_init(email_type='vandy')
             # Create message container - the correct MIME type is multipart/alternative.
@@ -423,7 +421,6 @@ def send_email_PHYS_AJC(ajc_gs_pd, now_dict):
         ## Logging in to Server
         smtpserver, my_email = email_init(email_type='vandy')
         to_email = 'PHYS_AJC@LIST.VANDERBILT.EDU'
-        # to_email = 'victor.calderon90@gmail.com'
         # Create message container - the correct MIME type is multipart/alternative.
         msg = MIMEMultipart('alternative')
         msg['Subject'] = 'Astronomy Journal Club'
@@ -432,12 +429,23 @@ def send_email_PHYS_AJC(ajc_gs_pd, now_dict):
         msg.add_header('reply-to', my_email)
         # Sending email
         today_info_pd   = today_ajc_pd.iloc[0]
-        title, author   = today_info_pd['Title'].split('by')
-        title           = title.strip().replace('“',"").replace('”',"")
-        author, year_id = author.strip().split(' et al. ')
-        year, arxiv_id  = year_id.split(" ")
-        year            = int(year.replace('(','').replace(')',''))
-        arxiv_id        = arxiv_id.replace('[','').replace(']','')
+        ##
+        try:
+            title, author   = today_info_pd['Title'].split('by')
+            title           = title.strip().replace('“',"").replace('”',"")
+            author, year_id = author.strip().split(' et al. ')
+            year, arxiv_id  = year_id.split(" ")
+            year            = int(year.replace('(','').replace(')',''))
+            arxiv_id        = arxiv_id.replace('[','').replace(']','')
+            ## ADS Query
+            ads_link, ads_link_match = ADS_Query(author, year, arxiv_id)
+        except AttributeError:
+            title = ""
+            author = ""
+            year = ""
+            arxiv_id = ""
+            ads_link = ""
+            ads_link_match = 0
         # Date
         today_datetime = datetime.datetime.date(today_info_pd['Date'])
         today_month    = today_datetime.strftime("%B")
@@ -448,8 +456,6 @@ def send_email_PHYS_AJC(ajc_gs_pd, now_dict):
                                                       today_month,
                                                       today_date,
                                                       today_year)
-        ## ADS Query
-        ads_link, ads_link_match = ADS_Query(author, year, arxiv_id)
         ## Composing message
         msg_html  = '<html>'
         msg_html += '<head></head>'
@@ -468,10 +474,9 @@ def send_email_PHYS_AJC(ajc_gs_pd, now_dict):
         msg_html += 'See you all there!<br /><br />'
         msg_html += 'Thanks!<br />'
         msg_html += '-'*130 + '<br />'
-        msg_html += 'Victor Calderon Arrivillaga<br />'
-        msg_html += 'Ph.D. Candidate in Physics<br />'
-        msg_html += "Email: <a href='mailto:victor.calderon@vanderbilt.edu'>victor.calderon@vanderbilt.edu</a><br />"
-        msg_html += "Website: <a href='http://vcalderon.me' target='_blank'>http://vcalderon.me</a><br />"
+        msg_html += '{0}<br />'.format(os.environ.get('ajc_name'))
+        msg_html += "Email: <a href='mailto:{0}'>{0}</a><br />".format(os.environ.get('ajc_email'))
+        msg_html += "Website: <a href='{0}' target='_blank'>{0}</a><br />".format(os.environ.get('ajc_website'))
         msg_html += "</p>"
         msg_html += '</body>'
         msg_html += '</html>'
@@ -532,7 +537,7 @@ def ADS_Query(author, year, arxiv_id):
         Dictionary with the information about the AJC paper.
     """
     # Token form 'https://ui.adsabs.harvard.edu/#user/settings/token'
-    ADS_token = 'hRgSJWx0VXqjAaVX5ReNfLYOTsYXcpfBpawkl9iF'
+    ADS_token = os.environ.get('ads_token')
     # Configuring Token
     ads.config.token = ADS_token
     # Searching for Paper
