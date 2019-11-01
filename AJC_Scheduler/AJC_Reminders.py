@@ -368,7 +368,7 @@ def send_email_reminder(ajc_gs_pd, now_dict):
             msg_html_2 += 'Please email them directly today to obtain their title before 8pm today!\r\n\r\n'
             msg_html_2 += 'Thanks!\r\n'
             msg_html_2 += '-'*100 + '\r\n'
-            msg_html_2 += '{0} \r\n'.format(os.environ.get(ajc_name))
+            msg_html_2 += '{0} \r\n'.format(os.environ.get('ajc_name'))
             msg_html_2 += "Email: {0}\r\n".format(os.environ.get('ajc_email'))
             msg_html_2 += "Website: {0}\r\n".format(os.environ.get('ajc_website'))
             ## Adding to `msg`
