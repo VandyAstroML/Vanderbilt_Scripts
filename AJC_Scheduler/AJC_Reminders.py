@@ -416,6 +416,8 @@ def send_email_PHYS_AJC(ajc_gs_pd, now_dict):
                                                  now_dict['year']))
     # Checking if today's date is in `ajc_gs_pd`
     today_ajc_pd = ajc_gs_pd.loc[ajc_gs_pd['Send_email']==today_pd]
+    # AJC Location
+    ajc_zoom_url = "https://vanderbilt.zoom.us/j/970017245"
     # Checking if value exists:
     if today_ajc_pd.shape[0] == 1:
         ## Logging in to Server
@@ -470,7 +472,8 @@ def send_email_PHYS_AJC(ajc_gs_pd, now_dict):
         msg_html += 'Speaker : {0} {1}<br />'.format( today_info_pd['first_name'],
                                             today_info_pd['last_name'])
         msg_html += 'Time    : {0} @ 12pm<br />'.format(today_date_str)
-        msg_html += 'Location: SC 6333<br /><br />'
+        # msg_html += 'Location: SC 6333<br /><br />'
+        msg_html += "Location: <a href='{0}'>{0}</a><br />".format(ajc_zoom_url)
         msg_html += 'See you all there!<br /><br />'
         msg_html += 'Thanks!<br />'
         msg_html += '-'*130 + '<br />'
